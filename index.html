@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SFU Course Prereq/Coreq Visualizations</title>
+  <style>
+    :root { --bg:#0f172a; --panel:#111827; --text:#e5e7eb; --muted:#94a3b8; --accent:#22d3ee; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    header{padding:20px 24px;border-bottom:1px solid #1f2937;background:#0b1220;position:sticky;top:0;z-index:10}
+    .wrap{display:grid;grid-template-columns: 340px 1fr;gap:0}
+    .sidebar{height:calc(100dvh - 72px);overflow:auto;border-right:1px solid #1f2937;background:#0b1220}
+    .main{height:calc(100dvh - 72px);display:flex;flex-direction:column}
+    .search{display:flex;gap:8px;padding:12px}
+    .search input,.search select{width:100%;padding:10px 12px;border:1px solid #334155;border-radius:10px;background:#0f172a;color:var(--text)}
+    .count{padding:0 12px 12px;color:var(--muted);font-size:13px}
+    .list{display:grid;gap:8px;padding:0 12px 16px}
+    .item{border:1px solid #273244;border-radius:12px;padding:12px;background:#0f172a;cursor:pointer;transition:transform .06s ease}
+    .item:hover{transform:translateY(-1px);border-color:#3b82f6}
+    .code{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;color:#93c5fd}
+    iframe{flex:1;border:0;background:#0b1220}
+    .empty{margin:auto;color:var(--muted)}
+    @media (max-width: 980px){ .wrap{grid-template-columns:1fr} .sidebar{height:auto} .main{height:auto} iframe{height:70vh} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;font-size:20px">SFU Course Prereq/Coreq Visualizations</h1>
+    <div style="color:var(--muted);font-size:13px">Browse, search, and open any course visualization.</div>
+  </header>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="search">
+        <input id="q" type="search" placeholder="Search by course code or title… (e.g., BUS 200, WLL)" />
+      </div>
+      <div class="search">
+        <select id="dept">
+          <option value="">All Departments</option>
+        </select>
+      </div>
+      <div class="count"><span id="resultCount">0</span> results</div>
+      <div id="list" class="list" role="list"></div>
+    </aside>
+
+    <main class="main">
+      <iframe id="viewer" title="Course Visualization"></iframe>
+      <div id="empty" class="empty" hidden>
+        <p>Select a course from the left to load its visualization.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const state = { all: [], filtered: [], selected: null };
+    const els = {
+      q: document.getElementById('q'),
+      dept: document.getElementById('dept'),
+      list: document.getElementById('list'),
+      viewer: document.getElementById('viewer'),
+      empty: document.getElementById('empty'),
+      count: document.getElementById('resultCount'),
+    };
+
+    async function boot(){
+      try{
+        const res = await fetch('manifest.json', { cache: 'no-store' });
+        if(!res.ok) throw new Error('manifest.json not found');
+        state.all = await res.json();
+        hydrateDeptFilter(state.all);
+        applyFilters();
+        // Support ?file=BUS-200.html deep link
+        const params = new URLSearchParams(location.search);
+        const file = params.get('file');
+        if(file){
+          const hit = state.all.find(x => x.file === file);
+          if(hit){ select(hit); }
+        }
+      }catch(err){
+        console.error(err);
+        els.list.innerHTML = `<div class="item">⚠️ Unable to load manifest.json. Make sure it exists at the repo root.</div>`;
+      }
+    }
+
+    function hydrateDeptFilter(items){
+      const depts = Array.from(new Set(items.map(x => x.dept))).sort();
+      for(const d of depts){
+        const opt = document.createElement('option');
+        opt.value = d; opt.textContent = d; els.dept.appendChild(opt);
+      }
+    }
+
+    function applyFilters(){
+      const q = els.q.value.trim().toLowerCase();
+      const d = els.dept.value;
+      state.filtered = state.all.filter(x => {
+        const matchesDept = !d || x.dept === d;
+        const hay = `${x.code} ${x.title}`.toLowerCase();
+        const matchesQ = !q || hay.includes(q);
+        return matchesDept && matchesQ;
+      });
+      renderList();
+    }
+
+    function renderList(){
+      els.list.innerHTML = '';
+      els.count.textContent = state.filtered.length;
+      if(state.filtered.length === 0){
+        els.list.innerHTML = '<div class="item">No matches. Try different search terms.</div>';
+        return;
+      }
+      for(const item of state.filtered){
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.role = 'listitem';
+        div.innerHTML = `
+          <div class="code">${item.code}</div>
+          <div style="font-weight:600">${item.title}</div>
+          <div style="color:#9ca3af;font-size:12px">${item.dept}${item.term ? ' • ' + item.term : ''}</div>
+        `;
+        div.addEventListener('click', () => select(item));
+        els.list.appendChild(div);
+      }
+    }
+
+    function select(item){
+      state.selected = item;
+      // Your files live in Course_Requisites/Visulizations/
+      els.viewer.src = `Course_Requisites/Visulizations/${item.file}`;
+      els.empty.hidden = true;
+      history.replaceState(null, '', `?file=${encodeURIComponent(item.file)}`);
+      els.viewer.addEventListener('load', () => {
+        els.viewer.contentWindow?.scrollTo?.(0,0);
+      }, { once:true });
+    }
+
+    els.q.addEventListener('input', applyFilters);
+    els.dept.addEventListener('change', applyFilters);
+
+    boot();
+  </script>
+</body>
+</html>
