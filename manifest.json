@@ -1,0 +1,345 @@
+[
+  {
+    "code": "ALS",
+    "title": "Applied Legal Studies",
+    "dept": "ALS",
+    "file": "ALS.html",
+    "term": "2025"
+  },
+  {
+    "code": "ARCH",
+    "title": "Archaeology",
+    "dept": "ARCH",
+    "file": "ARCH.html",
+    "term": "2025"
+  },
+  {
+    "code": "BISC",
+    "title": "Biological Sciences",
+    "dept": "BISC",
+    "file": "BISC.html",
+    "term": "2025"
+  },
+  {
+    "code": "BPK",
+    "title": "Biomedical Physiology and Kinesiology",
+    "dept": "BPK",
+    "file": "BPK.html",
+    "term": "2025"
+  },
+  {
+    "code": "BUS",
+    "title": "Business Administration",
+    "dept": "BUS",
+    "file": "BUS.html",
+    "term": "2025"
+  },
+  {
+    "code": "CA",
+    "title": "Contemporary Arts",
+    "dept": "CA",
+    "file": "CA.html",
+    "term": "2025"
+  },
+  {
+    "code": "CHEM",
+    "title": "Chemistry",
+    "dept": "CHEM",
+    "file": "CHEM.html",
+    "term": "2025"
+  },
+  {
+    "code": "CMNS",
+    "title": "Communications",
+    "dept": "CMNS",
+    "file": "CMNS.html",
+    "term": "2025"
+  },
+  {
+    "code": "CMPT",
+    "title": "Computing Science",
+    "dept": "CMPT",
+    "file": "CMPT.html",
+    "term": "2025"
+  },
+  {
+    "code": "COGS",
+    "title": "Cognitive Science",
+    "dept": "COGS",
+    "file": "COGS.html",
+    "term": "2025"
+  },
+  {
+    "code": "CRIM",
+    "title": "Criminology",
+    "dept": "CRIM",
+    "file": "CRIM.html",
+    "term": "2025"
+  },
+  {
+    "code": "DMED",
+    "title": "Course Visualization",
+    "dept": "DMED",
+    "file": "DMED.html",
+    "term": "2025"
+  },
+  {
+    "code": "EASC",
+    "title": "Earth Sciences",
+    "dept": "EASC",
+    "file": "EASC.html",
+    "term": "2025"
+  },
+  {
+    "code": "ECON",
+    "title": "Economics",
+    "dept": "ECON",
+    "file": "ECON.html",
+    "term": "2025"
+  },
+  {
+    "code": "EDUC",
+    "title": "Education",
+    "dept": "EDUC",
+    "file": "EDUC.html",
+    "term": "2025"
+  },
+  {
+    "code": "ENGL",
+    "title": "English",
+    "dept": "ENGL",
+    "file": "ENGL.html",
+    "term": "2025"
+  },
+  {
+    "code": "ENSC",
+    "title": "Engineering Science",
+    "dept": "ENSC",
+    "file": "ENSC.html",
+    "term": "2025"
+  },
+  {
+    "code": "ENVIRONMENT",
+    "title": "Environment",
+    "dept": "ENVIRONMENT",
+    "file": "ENV.html",
+    "term": "2025"
+  },
+  {
+    "code": "EVSC",
+    "title": "Environmental Science",
+    "dept": "EVSC",
+    "file": "EVSC.html",
+    "term": "2025"
+  },
+  {
+    "code": "FASS",
+    "title": "FASS",
+    "dept": "FASS",
+    "file": "FASS.html",
+    "term": "2025"
+  },
+  {
+    "code": "FREN",
+    "title": "French",
+    "dept": "FREN",
+    "file": "FREN.html",
+    "term": "2025"
+  },
+  {
+    "code": "GA",
+    "title": "Global Asia",
+    "dept": "GA",
+    "file": "GA.html",
+    "term": "2025"
+  },
+  {
+    "code": "GEOG",
+    "title": "Geography",
+    "dept": "GEOG",
+    "file": "GEOG.html",
+    "term": "2025"
+  },
+  {
+    "code": "GERO",
+    "title": "Gerontology",
+    "dept": "GERO",
+    "file": "GERO.html",
+    "term": "2025"
+  },
+  {
+    "code": "GSWS",
+    "title": "Gender Sexuality & Wom St",
+    "dept": "GSWS",
+    "file": "GSWS.html",
+    "term": "2025"
+  },
+  {
+    "code": "HIST",
+    "title": "History",
+    "dept": "HIST",
+    "file": "HIST.html",
+    "term": "2025"
+  },
+  {
+    "code": "HLTHSCI",
+    "title": "Health Sciences",
+    "dept": "HLTHSCI",
+    "file": "HLTHSCI.html",
+    "term": "2025"
+  },
+  {
+    "code": "HUM",
+    "title": "Humanities",
+    "dept": "HUM",
+    "file": "HUM.html",
+    "term": "2025"
+  },
+  {
+    "code": "IAT",
+    "title": "Interactive Arts and Technology",
+    "dept": "IAT",
+    "file": "IAT.html",
+    "term": "2025"
+  },
+  {
+    "code": "INDG",
+    "title": "Indigenous Studies",
+    "dept": "INDG",
+    "file": "INDG.html",
+    "term": "2025"
+  },
+  {
+    "code": "IS",
+    "title": "International Studies",
+    "dept": "IS",
+    "file": "IS.html",
+    "term": "2025"
+  },
+  {
+    "code": "LBST",
+    "title": "Labour Studies",
+    "dept": "LBST",
+    "file": "LBST.html",
+    "term": "2025"
+  },
+  {
+    "code": "LING",
+    "title": "Linguistics",
+    "dept": "LING",
+    "file": "LING.html",
+    "term": "2025"
+  },
+  {
+    "code": "MATH",
+    "title": "Mathematics",
+    "dept": "MATH",
+    "file": "MATH.html",
+    "term": "2025"
+  },
+  {
+    "code": "MBB",
+    "title": "Molecular Biology and Biochemistry",
+    "dept": "MBB",
+    "file": "MBB.html",
+    "term": "2025"
+  },
+  {
+    "code": "MSE",
+    "title": "Mechatronic Systems Engineering",
+    "dept": "MSE",
+    "file": "MSE.html",
+    "term": "2025"
+  },
+  {
+    "code": "PHIL",
+    "title": "Philosophy",
+    "dept": "PHIL",
+    "file": "PHIL.html",
+    "term": "2025"
+  },
+  {
+    "code": "PHYS",
+    "title": "Physics",
+    "dept": "PHYS",
+    "file": "PHYS.html",
+    "term": "2025"
+  },
+  {
+    "code": "PLCY",
+    "title": "Public Policy",
+    "dept": "PLCY",
+    "file": "PLCY.html",
+    "term": "2025"
+  },
+  {
+    "code": "POL",
+    "title": "Political Science",
+    "dept": "POL",
+    "file": "POL.html",
+    "term": "2025"
+  },
+  {
+    "code": "PSYC",
+    "title": "Psychology",
+    "dept": "PSYC",
+    "file": "PSYC.html",
+    "term": "2025"
+  },
+  {
+    "code": "PUB",
+    "title": "Publishing",
+    "dept": "PUB",
+    "file": "PUB.html",
+    "term": "2025"
+  },
+  {
+    "code": "REM",
+    "title": "Resource and Environmental Management",
+    "dept": "REM",
+    "file": "REM.html",
+    "term": "2025"
+  },
+  {
+    "code": "SA",
+    "title": "Sociology and Anthropology",
+    "dept": "SA",
+    "file": "SA.html",
+    "term": "2025"
+  },
+  {
+    "code": "SEE",
+    "title": "Sustainable Energy Engineering",
+    "dept": "SEE",
+    "file": "SEE.html",
+    "term": "2025"
+  },
+  {
+    "code": "SFU",
+    "title": "Course Visualization",
+    "dept": "SFU",
+    "file": "SFU.html",
+    "term": "2025"
+  },
+  {
+    "code": "STAT",
+    "title": "Statistics and Actuarial Science",
+    "dept": "STAT",
+    "file": "STAT.html",
+    "term": "2025"
+  },
+  {
+    "code": "URB",
+    "title": "Urban Studies",
+    "dept": "URB",
+    "file": "URB.html",
+    "term": "2025"
+  },
+  {
+    "code": "WLL",
+    "title": "World Lang and Lit",
+    "dept": "WLL",
+    "file": "WLL.html",
+    "term": "2025"
+  }
+]
