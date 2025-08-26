@@ -169,7 +169,7 @@
   },
   {
     "code": "GSWS",
-    "title": "Gender Sexuality & Wom St",
+    "title": "Gender, Sexuality, & Women's Studies",
     "dept": "GSWS",
     "file": "GSWS.html",
     "term": "2025"
@@ -337,10 +337,9 @@
   },
   {
     "code": "WLL",
-    "title": "World Lang and Lit",
+    "title": "World Languages and Literatures",
     "dept": "WLL",
     "file": "WLL.html",
     "term": "2025"
   }
-
 ]
