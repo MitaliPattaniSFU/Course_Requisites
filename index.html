@@ -127,7 +127,7 @@
     function select(item){
       state.selected = item;
       // Your files live in Course_Requisites/Visulizations/
-      els.viewer.src = `Course_Requisites/Visualizations/${item.file}`;
+      els.viewer.src = `Visualizations/${item.file}`;
       els.empty.hidden = true;
       history.replaceState(null, '', `?file=${encodeURIComponent(item.file)}`);
       els.viewer.addEventListener('load', () => {
