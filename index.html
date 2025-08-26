@@ -124,92 +124,92 @@ iframe{
   </div>
 
   <script>
+    const ROOT = new URL('.', window.location.href); // directory of index.html
     const state = { all: [], filtered: [], selected: null };
     const els = {
-      q: document.getElementById('q'),
       dept: document.getElementById('dept'),
-      list: document.getElementById('list'),
       viewer: document.getElementById('viewer'),
-      empty: document.getElementById('empty'),
-      count: document.getElementById('resultCount'),
+      empty: document.getElementById('empty')
     };
 
     async function boot(){
       try{
+        const manifestURL = new URL('manifest.json', ROOT);
         const res = await fetch('manifest.json', { cache: 'no-store' });
-        if(!res.ok) throw new Error('manifest.json not found');
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${manifestURL.href}`);
         state.all = await res.json();
         hydrateDeptFilter(state.all);
-        applyFilters();
-        // Support ?file=BUS-200.html deep link
+       //deep links
         const params = new URLSearchParams(location.search);
-        const file = params.get('file');
-        if(file){
-          const hit = state.all.find(x => x.file === file);
-          if(hit){ select(hit); }
+        const fileParam = params.get('file');
+        const deptParam = params.get('dept');
+         if (fileParam) {
+          const hit = state.all.find(x => x.file.toLowerCase() === fileParam.toLowerCase());
+          if (hit) { select(hit); els.dept.value = hit.dept; }
+        } else if (deptParam) {
+          els.dept.value = deptParam.toUpperCase();
+          selectByDept(els.dept.value);
+        } else {
+          selectDefault(); // sfu.html if present;
         }
+        // Change handler: load visualization immediately on department change
+        els.dept.addEventListener('change', () => selectByDept(els.dept.value));
       }catch(err){
         console.error(err);
         els.list.innerHTML = `<div class="item">⚠️ Unable to load manifest.json. Make sure it exists at the repo root.</div>`;
       }
-    }
-
-    function hydrateDeptFilter(items){
-      const depts = Array.from(new Set(items.map(x => x.dept))).sort();
-      for(const d of depts){
-        const opt = document.createElement('option');
-        opt.value = d; opt.textContent = d; els.dept.appendChild(opt);
-      }
-    }
-
-    function applyFilters(){
-      const q = els.q.value.trim().toLowerCase();
-      const d = els.dept.value;
-      state.filtered = state.all.filter(x => {
-        const matchesDept = !d || x.dept === d;
-        const hay = `${x.code} ${x.title}`.toLowerCase();
-        const matchesQ = !q || hay.includes(q);
-        return matchesDept && matchesQ;
-      });
-      renderList();
-    }
-
-    function renderList(){
-      els.list.innerHTML = '';
-      els.count.textContent = state.filtered.length;
-      if(state.filtered.length === 0){
-        els.list.innerHTML = '<div class="item">No matches. Try different search terms.</div>';
+    } 
+    
+   // Pick a visualization for a department
+    function selectByDept(dept) {
+      if (!dept) {                  // All Departments → default page
+        selectDefault();
         return;
       }
-      for(const item of state.filtered){
-        const div = document.createElement('div');
-        div.className = 'item';
-        div.role = 'listitem';
-        div.innerHTML = `
-          <div class="code">${item.code}</div>
-          <div style="font-weight:600">${item.title}</div>
-          <div style="color:#9ca3af;font-size:12px">${item.dept}${item.term ? ' • ' + item.term : ''}</div>
-        `;
-        div.addEventListener('click', () => select(item));
-        els.list.appendChild(div);
+      const pool = state.all.filter(x => x.dept === dept);
+      if (pool.length === 0) {
+        console.warn('No entries for dept:', dept);
+        selectDefault();
+        return;
       }
+      // Prefer a file named exactly "<DEPT>.html" if present; else first match
+      const preferred = pool.find(x => x.file.toLowerCase() === `${dept.toLowerCase()}.html`) || pool[0];
+      select(preferred);
     }
 
-    function select(item){
+    function selectDefault() {
+      const sfu = state.all.find(x => x.file.toLowerCase() === 'sfu.html');
+      if (sfu) select(sfu);
+    }
+    
+     function hydrateDeptFilter(items) {
+      // Collect unique dept codes and pick a "title" from the first match
+      const depts = {};
+      for (const x of items) {
+        if (!depts[x.dept]) {
+          depts[x.dept] = x.title || x.dept; // fallback to code if title missing
+        }
+      }
+      // Reset dropdown with "All Departments"
+      els.dept.innerHTML = '<option value="">All Departments</option>';
+      // Build options like "BUS — Business Administration"
+      Object.keys(depts).sort().forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = `${d} — ${depts[d]}`;
+        els.dept.appendChild(opt);
+      });
+    }
+    
+     function select(item) {
       state.selected = item;
-      // Your files live in Course_Requisites/Visulizations/
-      els.viewer.src = `Visualizations/${item.file}`;
+      const fileURL = new URL(`Visualizations/${item.file}`, ROOT); // ← folder name must match exactly
+      els.viewer.src = fileURL.href;
       els.empty.hidden = true;
-      history.replaceState(null, '', `?file=${encodeURIComponent(item.file)}`);
-      els.viewer.addEventListener('load', () => {
-        els.viewer.contentWindow?.scrollTo?.(0,0);
-      }, { once:true });
+      history.replaceState(null, '', `?dept=${encodeURIComponent(item.dept)}`);
     }
 
-    els.q.addEventListener('input', applyFilters);
-    els.dept.addEventListener('change', applyFilters);
-
-    boot();
+   boot();
   </script>
 </body>
 </html>
