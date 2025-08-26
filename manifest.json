@@ -78,7 +78,7 @@
   },
   {
     "code": "DMED",
-    "title": "Course Visualization",
+    "title": "Digital Media",
     "dept": "DMED",
     "file": "DMED.html",
     "term": "2025"
@@ -342,4 +342,5 @@
     "file": "WLL.html",
     "term": "2025"
   }
+
 ]
