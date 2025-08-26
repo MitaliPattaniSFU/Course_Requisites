@@ -6,8 +6,8 @@
   <title>SFU Course Prereq/Coreq Visualizations</title>
   <style>
     :root {
-  --bg: #fff;                  /* Background */
-  --panel: #f5f5f7;            /* Panel/sidebar */
+  --bg: transparent;                 /* Background */
+  --panel: transparent;            /* Panel/sidebar */
   --text: #222;                /* Main text */
   --muted: #888;               /* Muted/secondary text */
   --accent: #0074d9;           /* Accent color (blue) */
@@ -29,7 +29,7 @@ header{
 }
 .wrap{
   display:grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 300px 1fr;
   gap:0
 }
 .sidebar{
@@ -54,7 +54,7 @@ header{
   padding:10px 12px;
   border:1px solid #ddd;
   border-radius:10px;
-  background:#fff;
+  background:var(--bg);
   color:var(--text)
 }
 .count{
@@ -71,7 +71,7 @@ header{
   border:1px solid #e6e6e6;
   border-radius:12px;
   padding:12px;
-  background:#fff;
+  background:var(--bg);
   cursor:pointer;
   transition:transform .06s ease
 }
