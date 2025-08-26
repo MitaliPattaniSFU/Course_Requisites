@@ -105,17 +105,16 @@ iframe{
   <header>
     <h1 style="margin:0;font-size:20px">SFU Course Pre-requisites/Co-requisites Visualizations</h1>
     <div style="color:var(--muted);font-size:13px">Browse, search, and open any course visualization for a department.</div>
+    <!-- Department control now in header -->
+    <div class="field header-field">
+      <label for="dept" >Select Department</label>
+      <select id="dept" aria-label="Department">
+        <option value="">All Departments</option>
+      </select>
+    </div>
   </header>
 
   <div class="wrap">
-    <aside class="sidebar">
-      <div class="search">
-        <select id="dept">
-          <option value="">All Departments</option>
-        </select>
-      </div>
-    </aside>
-
     <main class="main">
       <iframe id="viewer" title="Course Visualization"></iframe>
       <div id="empty" class="empty" hidden>
