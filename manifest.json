@@ -316,7 +316,7 @@
   },
   {
     "code": "SFU",
-    "title": "Course Visualization",
+    "title": "Simon Fraser University",
     "dept": "SFU",
     "file": "SFU.html",
     "term": "2025"
@@ -342,4 +342,5 @@
     "file": "WLL.html",
     "term": "2025"
   }
+
 ]
